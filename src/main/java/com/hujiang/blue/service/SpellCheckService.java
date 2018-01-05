@@ -5,6 +5,7 @@ import org.assertj.core.util.Lists;
 import org.languagetool.JLanguageTool;
 import org.languagetool.language.BritishEnglish;
 import org.languagetool.rules.RuleMatch;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -17,6 +18,9 @@ import java.util.regex.Pattern;
 @Service
 public class SpellCheckService {
 
+    @Value("${txt.path}")
+    private String path;
+
     private static final char[] ALPHABET = "abcdefghijklmnopqrstuvwxyz".toCharArray();
     private Map<String, Double> langModel;
     private Set<String> dictionary;
@@ -25,7 +29,7 @@ public class SpellCheckService {
 
     @PostConstruct
     public void init() throws IOException {
-        langModel = buildLanguageModel("/Users/xujia/big.txt");
+        langModel = buildLanguageModel(path);
         dictionary = langModel.keySet();
         britishEnglish = new BritishEnglish();
     }
