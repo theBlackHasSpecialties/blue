@@ -1,0 +1,9 @@
+target/
+.settings/
+.idea/
+.project
+.classpath
+
+### Java template
+*.class
+*.iml
